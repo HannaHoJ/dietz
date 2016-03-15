@@ -1,0 +1,43 @@
+<head>
+  <title>Demeterhof Dietz</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+     	<h1>Demeterhof Dietz</h1>
+    </header>
+  
+	<h2>Online-Bestellung</h2>	
+ 	
+    <ul>
+      {{#each items}}
+	      {{> item}}
+      {{/each}}
+    </ul>
+   </div>
+</body>
+
+<template name="item">
+
+	<h4>Rogenmischbrot</h4>
+	<div label = "Preis">3,50 €</div>
+	<div>Bitte wählen Sie die Menge aus.</div>
+	<select label="Menge">
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+			<option>6</option>
+	</select>
+	
+  
+  <img src="http://www.duden.de/_media_/full/B/Brot-201100279221.jpg" alt=":)" style="position:absolute; TOP:120px; LEFT:300px; WIDTH:150px; HEIGHT:150px">
+
+  <div label= "Beschreibung">Beschreibung:</div>
+  <div>70% Roggenmehl Type 1150, 
+  		30% Weizenmehl Type 1050
+  		Triebmittel: Sauerteig</div>
+
+</template>
