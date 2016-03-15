@@ -6,17 +6,49 @@
     <div class="container">
         <header>
             <h1>Demeterhof Dietz</h1>
+            <form class="new-item">
+                <input type="text" name="title" placeholder="add title" />
+                <br>
+                <input type="text" name="price" placeholder="add price" />
+                <br>
+                <input type="text" name="image" placeholder="add image" />
+                <br>
+                <input type="text" name="ingredients1" placeholder="add ingredient" />
+                <br>
+                <input type="text" name="triebmittel" placeholder="add Triebmittel" />
+                <br>
+				<input type="submit" value="submit"/>                
+                <br>
+            </form>
+            <div class="menue-container"></div>
+            <ul id="mainmenue">
+                <li>Demeter Dietz</li>
+                <ul id="submenue" class="introduction">
+                    <li>Philosophie</li>
+                    <li>Geschichte</li>
+                    <li>Blick in die Backstube</li>
+                    <li>Blick in den Stall</li>
+                </ul>
+                <li>Produkte</li>
+                <ul id="submenue" class="products">
+                    <li>Brote</li>
+                    <li>Hofladen</li>
+                    <li>Frischwaren</li>
+                    <li>Milchprodukte</li>
+                </ul>
+                <li>Shop</li>
+                <h2>Online-Bestellung</h2>
+                <ul>
+                    {{#each items}} {{> item}} {{/each}}
+                </ul>
+                <li>Kontakt</li>
+            </ul>
         </header>
-        <h2>Online-Bestellung</h2>
-        <ul>
-            {{#each items}} 
-            	{{> item}} 
-            {{/each}}
-        </ul>
     </div>
 </body>
-
 <template name="item">
+    <button class="delete">&times;</button>
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
     <h4>{{title}}</h4>
     <div label="Preis">Preis: {{price}}€</div>
     <div>Bitte wählen Sie die Menge aus.</div>
@@ -32,5 +64,5 @@
     <div label="Beschreibung">Beschreibung:</div>
     <div>{{ingredients1}}</div>
     <div>{{ingredients2}}</div>
-    <div>Triebmittel: {{Triebmittel}}</div>
+    <div>Triebmittel: {{triebmittel}}</div>
 </template>
