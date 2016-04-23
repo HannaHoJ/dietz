@@ -13,56 +13,82 @@
                 <br>
                 <input type="text" name="image" placeholder="add image" />
                 <br>
-                <input type="text" name="ingredients1" placeholder="add ingredient" />
+                <input type="text" name="ingredients" placeholder="add ingredient" />
                 <br>
                 <input type="text" name="triebmittel" placeholder="add Triebmittel" />
                 <br>
-				<input type="submit" value="submit"/>                
+                <input type="submit" value="submit" />
                 <br>
             </form>
-            <div class="menue-container"></div>
-            <ul id="mainmenue">
-                <li>Demeter Dietz</li>
-                <ul id="submenue" class="introduction">
-                    <li>Philosophie</li>
-                    <li>Geschichte</li>
-                    <li>Blick in die Backstube</li>
-                    <li>Blick in den Stall</li>
-                </ul>
-                <li>Produkte</li>
-                <ul id="submenue" class="products">
-                    <li>Brote</li>
-                    <li>Hofladen</li>
-                    <li>Frischwaren</li>
-                    <li>Milchprodukte</li>
-                </ul>
-                <li>Shop</li>
-                <h2>Online-Bestellung</h2>
-                <ul>
-                    {{#each items}} {{> item}} {{/each}}
-                </ul>
-                <li>Kontakt</li>
-            </ul>
+            <div class="menue-container">
+                <a id="offcanvas-toggler" class="menu" href="#">
+                    <div class="lines-container clearfix">
+                        <span class="line top">t</span>
+                        <span class="line middle">m</span>
+                        <span class="line bottom">b</span>
+                    </div>
+                </a>
+            </div>
+            <div id="mainmenue">
+                <a data-category="about" href="#">Über uns</a><br>
+                <a data-category="products" href="#">Produkte</a><br>
+                <a data-category="shop" href="#">Einkaufswagen</a><br>
+                <a data-category="contact" href="#">Kontakt</a><br>
+            </div>
         </header>
+        <div id="about" class="section">
+            <h3 id=sp-about>Über uns</h3>
+            </div>
+        <div id="products" class="section">
+            <h3 id=sp-products>Produkte</h3>
+            {{#each items}} 
+                {{> item}}  
+            {{/each}}   
+        </div>
+        <div id="shop" class="section">
+            <h3 id=sp-cart>Einkaufswagen</h3>
+            {{#each carts}} 
+                {{> cart}} 
+            {{/each}}
+            <div id=total>Total:</div>
+        </div>
+        <div id="contact" class="section">
+            <h3 id=-sp-contract>Kontakt</h3>
+            </div> 
     </div>
 </body>
 <template name="item">
-    <button class="delete">&times;</button>
-    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-    <h4>{{title}}</h4>
-    <div label="Preis">Preis: {{price}}€</div>
-    <div>Bitte wählen Sie die Menge aus.</div>
-    <select label="Menge">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-    </select>
-    <img src="{{image}}" alt=":)" style="WIDTH:150px; HEIGHT:150px" />
-    <div label="Beschreibung">Beschreibung:</div>
-    <div>{{ingredients1}}</div>
-    <div>{{ingredients2}}</div>
-    <div>Triebmittel: {{triebmittel}}</div>
+    <div class="item">
+        <button class="delete">&times;</button>
+        <h4 class= "title">{{title}}</h4>
+        <div class="price">Preis: {{price}}€</div>
+        <div>Bitte wählen Sie die Menge aus.</div>
+        <select class="qty">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+        </select>
+        <img src="{{image}}" alt=":)" style="WIDTH:150px; HEIGHT:150px" />
+        <div class="description">Beschreibung:</div>
+        <div>{{ingredients}}</div>
+        <div>Triebmittel: {{triebmittel}}</div>
+        <div class = "productId">Produktnummer: {{productId}}</div>
+        <div class = "userId">#{{userId}}</div>
+        <button class="addToCart">Einkaufswagen</button>    
+    </div>
 </template>
+<template name="cart">
+    <button class="delete">&times;</button>
+     <div class = "title">{{title}}</div>
+    <div class = "userId">#{{userId}}</div>
+    <div class = "price">Einzelpreis: {{price}}€</div>
+    <div class = "qty">Anzahl: {{qty}}</div>
+    <div class = "groupPrice">Preis: {{groupPrice}}</div>
+    <div class = "productId">Produktnummer: {{productId}}</div>
+    <img src="{{image}}" alt=":)" style="WIDTH:150px; HEIGHT:150px" />
+</template>
+<template name="total">{{totalPrice userId}}</template> 
+    
