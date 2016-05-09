@@ -2,10 +2,19 @@ var Items = new Mongo.Collection("items");
 var Carts = new Mongo.Collection("carts");
 
 
+
 if (Meteor.isClient) {
     //define subtotal outside of helper and call it in helpers
     //since you dont have access to the helpers in the helers functions.
-
+    // 
+    var getCart = function() {
+        var cart = Carts.findOne({}); //synchron 
+        if (!cart) {
+            cart = { lineitems: [] };
+            Carts.insert(cart);
+        }
+        return cart;
+    }
 
     var subtotal = function() {
         var subtotalPrice = 0;
@@ -105,15 +114,16 @@ if (Meteor.isClient) {
             var productId = form.find('.productId').html();
             //var subtotal = form.find('.subtotal').val();
             //TODO: correctly insert into carts (put the bread in the cart)
-            Carts.insert({
-                    title: title,
-                    productId: productId,
-                    userId: userId,
-                    price: price,
-                    qty: qty,
-                    //subtotal: subtotal
-            });
-            Carts.insert(this);
+            var cart = getCart();
+            var item = {
+                title: title,
+                productId: productId,
+                userId: userId,
+                price: price,
+                qty: qty,
+            }
+            cart.lineitems.push(item);
+            Carts.update({_id: cart._id}, cart);
         },
         "click .delete": function() {
             Items.remove(this._id);
